@@ -1,27 +1,47 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Router
- *
- * @author danpit134
- */
 namespace core;
 
 use core\configs;
 
+/**
+ * Sadala URL pa daļām - modulis, kontrolieris, darbība, statiskais skats, pārējie parametri
+ */
 class Router {
     
+    /**
+     * Kontroliera nosaukums
+     * @var string 
+     */
     protected $controller = null;
+    /**
+     * Darbības nosaukums
+     * @var string 
+     */
     protected $action = null;
+    /**
+     * Moduļa nosaukums
+     * @var string 
+     */
     protected $module = null;
+    /**
+     * Statiskā skata nosaukums
+     * @var string
+     */
     protected $static = null;
+    /**
+     * Padoto parametru masīvs
+     * @var array 
+     */
     protected $params = array();
     
+    /**
+     * Sadalam URL parametrus pēc definējuma
+     * w - w=([module])/[controller]/[action]
+     * s - s=[static_view]
+     * ... other GET params
+     * @param array $params Padotie parametri
+     */
     public function __construct($params) {
         if (isset($params['w']) && !empty($params['w'])) {
             $addr = $params['w'];
@@ -40,6 +60,15 @@ class Router {
         $this->setData($addr, $static, $params);
     }
     
+    /**
+     * Dod iespēju atgriezt eksistējošus mainīgos, izmantojot metodi
+     * @example $this->getController() atgriež mainīgo protected $controller
+     * @param string $name Izsauktās metodes nosaukums
+     * @param array $arguments Padotie papildus parametri (šeit tādi nav izmantoti)
+     * @return null|boolean|string Atgriež null, ja nav atrasts mainīgais,
+     * false, ja nav izsaukta "get" metode,
+     * pašu mainīgo, ja viss ir kārtībā
+     */
     public function __call($name, $arguments) {
         if (substr($name, 0, 3)=="get") {
             $name = strtolower(substr($name, 3));
@@ -51,6 +80,13 @@ class Router {
         return false;
     }
     
+    /**
+     * Pārbauda visas config failā norādītās vērtības,
+     * saliek visas iegūtās vērtības
+     * @param string $addr Neapstrādāta adrese
+     * @param string $static Statiskā skata nosaukums
+     * @param array $params Padotie papildus parametri
+     */
     private function setData($addr = null, $static = null, $params = array()) {
         $routerDefaults = configs\CoreConfig::router();
         if ($addr === null) {

@@ -1,19 +1,17 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of CoreConfig
- *
- * @author danpit134
- */
 namespace core\configs;
 
+/**
+ * Satur nepieciešamos konfigus, kuri tiek ik pa laikam izsaukti
+ * Visas metodes ir statiskas, lai viegli tikt klāt un nav nepieciešami objekti
+ */
 class CoreConfig {
     
+    /**
+     * Defaultie Routing uzstādījumi
+     * @return array default routing
+     */
     public static function router() {
         return array(
             'controller' => 'default',
@@ -21,6 +19,10 @@ class CoreConfig {
         );
     }
     
+    /**
+     * Papildus paplašinājumi
+     * @return array paplašinājumu saraksts
+     */
     public static function extensions() {
         return array(
             'rb' => array(

@@ -1,19 +1,24 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Validator
- *
- * @author danpit134
- */
 namespace classes;
 
+
+/**
+ * Klase Validator saturēs visas statiskas metodes
+ * Paredzēts, lai validētu datus
+ * Metodes tiks liktas klāt pēc nepieciešamības
+ * 
+ * @version 1.0
+ * @author Daniels Pitkevičs <daniels.pitkevics@gmail.com>
+ */
 class Validator {
     
+    /**
+     * Validē Get parametrus visus.
+     * @return mixed Validētus masīvu, ja ir dati,
+     * tukšu masīvu, ja nav dati
+     * stringu, ja nav padots masīvs (nenotiks)
+     */
     public static function Get() {
         $g = $_GET;
         if (is_array($g) && !empty($g))
@@ -26,10 +31,20 @@ class Validator {
             return null;
     }
     
+    /**
+     * Validē stringu
+     * @param string $string Teksta gabals, kuru validēt
+     * @return string Validēts teksts
+     */
     public static function Encode ($string) {
         return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
     }
     
+    /**
+     * Validē masīvu
+     * @param array $data Nevalidēts masīvs
+     * @return array Validēts masīvs
+     */
     public static function EncodeArray(array $data) {
         $d = array();
         foreach ($data as $key => $value) {
