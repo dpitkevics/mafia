@@ -1,1 +1,1 @@
-<p>Your login state: <?=($isUser)?"true":"false";?></p>
+<p>Your login state: <?php \classes\Dump::r($isUser); ?></p>

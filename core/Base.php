@@ -24,7 +24,10 @@ class Base {
      */
     public function Run() {
         \classes\Session::startSession();
-        \R::setup('mysql:host=localhost;dbname=maf','root','');
+        
+        $db = configs\CoreConfig::db();
+        \R::setup($db['string'],$db['user'],$db['pass']);
+        
         $router = new Router(\classes\Validator::Get());
         $loader = new Loader($router->getController(), $router->getAction(), $router->getModule(), $router->getStatic(), $router->getParams());
     }

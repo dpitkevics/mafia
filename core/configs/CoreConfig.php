@@ -14,7 +14,7 @@ class CoreConfig {
      */
     public static function router() {
         return array(
-            'controller' => 'default',
+            'controller' => 'site',
             'action' => 'index',
         );
     }
@@ -30,6 +30,14 @@ class CoreConfig {
                 'subclasses' => array(
                 ),
             )
+        );
+    }
+    
+    public static function db() {
+        return array(
+            'string' => 'mysql:host=localhost;dbname=maf',
+            'user' => 'root',
+            'pass' => '',
         );
     }
     
