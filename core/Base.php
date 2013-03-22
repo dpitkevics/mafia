@@ -23,6 +23,7 @@ class Base {
      * Ielādē nepieciešamos kontrolierus un moduļus un darbības
      */
     public function Run() {
+        \classes\Session::startSession();
         \R::setup('mysql:host=localhost;dbname=maf','root','');
         $router = new Router(\classes\Validator::Get());
         $loader = new Loader($router->getController(), $router->getAction(), $router->getModule(), $router->getStatic(), $router->getParams());

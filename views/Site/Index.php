@@ -1,1 +1,1 @@
-<h1>Hi, <?=$b;?></h1>
+<p>Your login state: <?=($isUser)?"true":"false";?></p>

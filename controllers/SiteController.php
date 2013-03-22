@@ -16,11 +16,35 @@ use core\mvc;
 
 class SiteController extends mvc\Controller {
     
-    public function actionIndex($b, $c) {
-        $test = new \models\Model_Test();
-        $test->update();
+    public function actionIndex() {
+        $auth = new \classes\Authentication();            
         
-        $this->draw('index', array('b' => $b));
+        $this->draw('index', array('isUser' => $auth->checkAuth()));
+    }
+    
+    public function actionLogin() {
+        if (\classes\Bool::isPost()) {
+            $post = \classes\Validator::EncodeArray($_POST);
+            $auth = new \classes\Authentication();
+            $auth->setAuthenticationData($post);
+            
+            $user = $auth->findAuth();
+            
+            if ($user) {
+                $auth->setAuth ($user);
+                \classes\Mover::Redirect(\classes\URL::create('site/index'));
+            } else
+                echo 'Wrong authentication data';
+        }
+        $this->draw('login');
+    }
+    
+    public function actionLogout() {
+        $auth = new \classes\Authentication();
+        if ($auth->checkAuth())
+            $auth->removeAuth ();
+        \classes\Session::deleteAllSessions();
+        \classes\Mover::Redirect(\classes\URL::create('site/index'));
     }
     
 }

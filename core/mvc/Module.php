@@ -2,6 +2,9 @@
 
 namespace core\mvc;
 
+/**
+ * Galvenā moduļu klase
+ */
 class Module {
     
     /**
