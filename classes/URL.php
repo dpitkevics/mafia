@@ -20,6 +20,7 @@ class URL {
             $url[$key] = $value;
         }
         $url = URL::decode(URL::buildQuery($url));
+        $url = ((strpos($url,'?')===false)?'?':'') . $url;
         return $url;
     }
     

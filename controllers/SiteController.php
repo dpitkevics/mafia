@@ -12,14 +12,16 @@
  */
 namespace controllers;
 
-use core\mvc;
-
-class SiteController extends mvc\Controller {
-    
+class SiteController extends \myclasses\BaseController {
+          
     public function actionIndex() {
         $auth = new \classes\Authentication();            
         
         $this->draw('index', array('isUser' => $auth->checkAuth()));
+    }
+    
+    public function actionTest() {
+        $this->draw('test');
     }
     
     public function actionLogin() {

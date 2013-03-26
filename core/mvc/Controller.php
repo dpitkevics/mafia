@@ -83,7 +83,21 @@ class Controller {
      * @return boolean Atgriež false, ja nav iziets beforeDraw vai afterDraw.
      */
     protected function draw($view, array $params = array()) {
-        $path = ROOT_DIR . "views/" . $this->controller . "/" . $view . ".php";
+        if (strpos($view, '.')===false)
+            $path = ROOT_DIR . "views/" . $this->controller . "/" . $view . ".php";
+        else {
+            $viewParts = explode('.', $view);
+            $reverse = array_reverse($viewParts);
+            $path = '';
+            foreach ($reverse as $vPart) {
+                $path = '/' . $vPart . $path;
+            }
+            if (count($reverse)>2)
+                $path = ltrim ($path, '/');
+            else
+                $path = 'views' . $path;
+            $path = ROOT_DIR . $path . '.php';
+        }
         
         extract ($params);
         ob_start();
