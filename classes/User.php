@@ -1,16 +1,32 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace classes;
 
-/**
- * Description of User
- *
- * @author danpit134
- */
 class User {
-    //put your code here
+    
+    protected $id;
+    protected $username;
+    protected $password;
+    protected $email;
+    protected $name;
+    protected $surname;
+    protected $age;
+    protected $refered_by;
+    protected $session_id;
+    protected $timestamp;
+    
+    public function __construct(\RedBean_OODBBean $user) {
+        $this->id = $user->id;
+        $this->username = $user->username;
+        $this->password = $user->password;
+        $this->email = $user->email;
+        $this->name = $user->name;
+        $this->surname = $user->surname;
+        $this->age = $user->age;
+        $this->refered_by = $user->refered_by;
+        $this->session_id = $user->session_id;
+        $this->timestamp = $user->timestamp;
+    }
+    
 }
 
