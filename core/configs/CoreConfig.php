@@ -16,6 +16,7 @@ class CoreConfig {
         return array(
             'controller' => 'site',
             'action' => 'index',
+            'shortUrl' => true,
         );
     }
     

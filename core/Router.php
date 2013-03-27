@@ -43,6 +43,14 @@ class Router {
      * @param array $params Padotie parametri
      */
     public function __construct($params) {
+        $config = configs\CoreConfig::router();
+        
+        if ($config['shortUrl']) {
+            $url = \classes\URL::shortToParts();
+            $this->setData($url['addr'], $url['static'], $url['params']);
+            return;
+        }
+        
         if (isset($params['w']) && !empty($params['w'])) {
             $addr = $params['w'];
             unset ($params['w']);

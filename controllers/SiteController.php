@@ -16,7 +16,7 @@ class SiteController extends \myclasses\BaseController {
           
     public function actionIndex() {
         $auth = new \classes\Authentication();            
-        
+
         $this->draw('index', array('isUser' => $auth->checkAuth()));
     }
     
