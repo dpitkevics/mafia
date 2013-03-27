@@ -5,6 +5,7 @@
         <meta charset="utf8">
 
         <link rel="stylesheet" href="<?=ROOT_HOST;?>/css/bootstrap.css" />
+        <link rel="stylesheet" href="<?=ROOT_HOST;?>/css/main.css" />
     </head>
     <body>
         
@@ -14,7 +15,7 @@
                 
                 <?php if (!$this->auth->checkAuth()): ?>
                 
-                <?=classes\Html::formBegin();?>
+                <?=classes\Html::formBegin('', 'post', array('style' => 'margin: 0px;'));?>
                 
                 <div class="span3">
                     <?=classes\Html::textField('username', '', array('placeholder' => 'Username'));?>
@@ -32,10 +33,46 @@
                 <?=classes\Html::formEnd();?>
                 
                 <?php else: ?>
-                
-                <?=classes\Html::link('Logout', \classes\URL::create('site/logout'), array('class' => 'btn btn-primary'));?>
-                
+                    
                 <?php endif; ?>
+                
+                <div class="span4">
+                    <?=classes\Html::unorderedList(
+                        array(
+                            array(
+                                'link' => array(
+                                    'name' => 'Home',
+                                    'url' => \classes\URL::create('site/index'),
+                                ),
+                                'htmlOptions' => array(
+                                    'class' => 'active',
+                                )
+                            ),
+                            array(
+                                'link' => array(
+                                    'name' => 'About',
+                                    'url' => \classes\URL::create('site/about'),
+                                ),
+                            ),
+                            array(
+                                'link' => array(
+                                    'name' => 'Contacts',
+                                    'url' => \classes\URL::create('site/contact'),
+                                ),
+                            ),
+                            ($this->auth->checkAuth() ? array(
+                                'link' => array(
+                                    'name' => 'Logout',
+                                    'url' => \classes\URL::create('site/logout'),
+                                ),
+                            ) : false),
+                        ),
+                        array(
+                            'class' => 'nav nav-pills'
+                        )
+                    );
+                    ?>
+                </div>
                 
             </div>
             
@@ -48,6 +85,6 @@
         </div>
         
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="<?=ROOT_HOST;?>js/bootstrap.min.js"></script>
+        <script src="<?=ROOT_HOST;?>/js/bootstrap.min.js"></script>
     </body>
 </html>
