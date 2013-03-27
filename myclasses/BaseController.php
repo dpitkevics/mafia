@@ -15,6 +15,7 @@ class BaseController extends mvc\Controller {
         if (\classes\Bool::isPost()) {
             $post = \classes\Validator::EncodeArray($_POST);
             if (isset($post['login'])) {
+                $post['password'] = sha1($post['password']);
                 $auth->setAuthenticationData($post);
                 
                 $found = $auth->findAuth();
