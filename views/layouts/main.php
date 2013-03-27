@@ -12,31 +12,7 @@
         <div class="container">
             
             <div class="row">
-                
-                <?php if (!$this->auth->checkAuth()): ?>
-                
-                <?=classes\Html::formBegin('', 'post', array('style' => 'margin: 0px;'));?>
-                
-                <div class="span3">
-                    <?=classes\Html::textField('username', '', array('placeholder' => 'Username'));?>
-                </div>
-                
-                <div class="span3">
-                    <?=classes\Html::passwordField('password', '', array('placeholder' => 'Password'));?>
-                </div>
-                
-                <div class="span2">
-                    <?=classes\Html::submitButton('Login', array('class' => 'btn btn-primary'));?>
-                </div>
-                
-                <?=classes\Html::hiddenField('login');?>
-                <?=classes\Html::formEnd();?>
-                
-                <?php else: ?>
-                    
-                <?php endif; ?>
-                
-                <div class="span4">
+                <div class="">
                     <?=classes\Html::unorderedList(
                         array(
                             array(
@@ -73,6 +49,27 @@
                     );
                     ?>
                 </div>
+                
+                <?php if (!$this->auth->checkAuth()): ?>
+                <div id="login-form-holder">
+					<?=classes\Html::formBegin('', 'post', array('id'=>'login-form'));?>
+					
+					<div class="span3">
+						<?=classes\Html::textField('username', '', array('placeholder' => 'Username'));?>
+					</div>
+					
+					<div class="span3">
+						<?=classes\Html::passwordField('password', '', array('placeholder' => 'Password'));?>
+					</div>
+					
+					<div class="span2">
+						<?=classes\Html::submitButton('Login', array('class' => 'btn btn-primary'));?>
+					</div>
+					
+					<?=classes\Html::hiddenField('login');?>
+					<?=classes\Html::formEnd();?>
+                </div>
+                <?php endif; ?>
                 
             </div>
             
