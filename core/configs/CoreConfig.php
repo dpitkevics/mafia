@@ -36,8 +36,8 @@ class CoreConfig {
     public static function db() {
         return array(
             'string' => 'mysql:host=localhost;dbname=maf',
-            'user' => 'root',
-            'pass' => '',
+            'user' => 'maf',
+            'pass' => 'fUqvB7y7qUrcHMDH',
         );
     }
     
