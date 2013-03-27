@@ -12,33 +12,7 @@
         <div class="container">
             
             <div class="row">
-                
-                <?php if (!$this->auth->checkAuth()): ?>
-                
-                <?=classes\Html::formBegin('', 'post', array('style' => 'margin: 0px;'));?>
-                
-                <div class="span3">
-                    <?=classes\Html::textField('username', '', array('placeholder' => 'Username'));?>
-                </div>
-                
-                <div class="span3">
-                    <?=classes\Html::passwordField('password', '', array('placeholder' => 'Password'));?>
-                </div>
-                
-                <div class="span1">
-                    <?=classes\Html::submitButton('Login', array('class' => 'btn btn-primary'));?>
-                </div>
-                
-                <?=classes\Html::hiddenField('login');?>
-                <?=classes\Html::formEnd();?>
-                
-                <div class="span1">
-                    <?=classes\Html::link('Registration', classes\URL::create('site/registration'), array('class' => 'button'));?>
-                </div>
-                
-                <?php endif; ?>
-                
-                <div class="span4">
+                <div>
                     <?=classes\Html::unorderedList(
                         array(
                             array(
@@ -76,6 +50,26 @@
                     ?>
                 </div>
                 
+                <?php if (!$this->auth->checkAuth()): ?>
+                <div id="login-form-holder">
+                <?=classes\Html::formBegin('', 'post', array('id'=>'login-form'));?>
+                
+                <div class="span3">
+                    <?=classes\Html::textField('username', '', array('placeholder' => 'Username'));?>
+                </div>
+                
+                <div class="span3">
+                    <?=classes\Html::passwordField('password', '', array('placeholder' => 'Password'));?>
+                </div>
+                
+                <div class="span2">
+                    <?=classes\Html::submitButton('Login', array('class' => 'btn btn-primary'));?>
+                </div>
+                
+                <?=classes\Html::hiddenField('login');?>
+                <?=classes\Html::formEnd();?>
+                </div>
+                <?php endif; ?>
             </div>
             
             <div class="row">

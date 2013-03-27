@@ -1,3 +1,7 @@
+#login-form{
+	margin: 0px;
+	overflow: hidden;
+}
 .button, .button:active, .button:hover, .button:focus {
     color: #ffffff;
     background-color: #0088cc;
