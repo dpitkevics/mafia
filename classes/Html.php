@@ -16,8 +16,8 @@ class Html {
         return "</form>";
     }
     
-    public static function label($id, $text) {
-        $labelString = "<label for='$id'>$text</label>";
+    public static function label($id, $text, $required = false) {
+        $labelString = "<label for='$id'>$text".($required?"<span style='color:red'>*</span>":"")."</label>";
         return $labelString;
     }
     
@@ -31,6 +31,30 @@ class Html {
     
     public static function passwordField($name, $value='', array $htmlOptions=array()) {
         return self::inputField('password', $name, $value, $htmlOptions);
+    }
+    
+    public static function dropDownField($name, $data=array(), array $htmlOptions=array()) {
+        $htmlOptions = self::htmlOptionsToString($htmlOptions);
+        $selectString = "<select name='$name' $htmlOptions>";
+        
+        if (is_array($data)) {
+            foreach ($data as $key => $value) {
+                $selectString .= "<option value='$key'>$value</option>";
+            }
+        } else {
+            if (strpos($data, 'range')!==false) {
+                $data = substr($data, strpos($data, ':')+1);
+                $data = explode('-', $data);
+                $beg = $data[0];
+                $end = $data[1];
+                for ($i = $beg; $i <= $end; $i++) {
+                    $selectString .= "<option value='$i'>$i</option>";
+                }
+            }
+        }
+        $selectString .= "</select>";
+        
+        return $selectString;
     }
     
     public static function submitButton($label='Submit', array $htmlOptions=array()) {
@@ -58,6 +82,10 @@ class Html {
         if (!array_key_exists('id', $htmlOptions)) {
             $htmlOptions['id'] = $name;
         }
+        
+        $post = Validator::EncodeArray($_POST);
+        if (isset($post[$name]))
+            $htmlOptions['value'] = $post[$name];
 
         $htmlOptions = self::htmlOptionsToString($htmlOptions);
         $inputString = "<input $htmlOptions />";

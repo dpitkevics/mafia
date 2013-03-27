@@ -20,8 +20,31 @@ class SiteController extends \myclasses\BaseController {
         $this->draw('index', array('isUser' => $auth->checkAuth()));
     }
     
-    public function actionTest() {
-        $this->draw('test');
+    public function actionRegistration() {
+        $model = new \models\Model_Users();
+        
+        if (\classes\Bool::isPost()) {
+            $post = \classes\Validator::EncodeArray($_POST);
+            $model->data = $post[$model->model];
+            if (!$model->validate())
+                $this->errors = $model->errors;
+            else {
+                $model->data['password'] = sha1($model->data['password']);
+                $model->data['timestamp'] = time();
+                unset($model->data['password_ver']);
+                $model->save();
+                \classes\Mover::Redirect(\classes\URL::create('site/regComplete'));
+            }
+        }
+        
+        $this->draw('registration', array('model' => $model));
+    }
+    
+    public function actionRegComplete() {
+        $this->draw('off.complete', array(
+            'name' => 'Registration',
+            'alt' => 'Check Your email for confirmation.'
+        ));
     }
     
     public function actionLogin() {

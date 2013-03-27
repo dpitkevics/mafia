@@ -20,6 +20,12 @@ class Controller {
     protected $layout = "main";
     
     /**
+     * Kļūdas
+     * @var array
+     */
+    protected $errors = array();
+    
+    /**
      * Nosakam kontroliera nosaukumu
      * @param string $controller Kontroliera nosaukums
      */
