@@ -23,17 +23,11 @@ class BaseController extends mvc\Controller {
                     $auth->setAuth ($found);
                     \classes\Mover::Redirect(\classes\URL::create('site/index'));
                 } else {
-                    echo 'Wrong auth data';
+                    $this->errors['login'][] = "<p>Wrong authentication data.</p>";
                 }
             }
         } 
-        
-        /*
-        if (!$auth->checkAuth()) {
-            $this->draw('off.login');
-            return false;
-        }
-         */
+
         return true;
     }
     

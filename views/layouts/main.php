@@ -51,6 +51,14 @@
                 </div>
                 
                 <?php if (!$this->auth->checkAuth()): ?>
+                <div class="row errors">
+                    <?php if (isset($this->errors['login']) && !empty($this->errors['login'])) {
+                        foreach ($this->errors['login'] as $error) {
+                            echo $error;
+                        }
+                    } ?>
+                </div>
+                
                 <div id="login-form-holder">
                 <?=classes\Html::formBegin('', 'post', array('id'=>'login-form'));?>
                 
@@ -63,7 +71,7 @@
                 </div>
                 
                 <div class="span2">
-                    <?=classes\Html::submitButton('Login', array('class' => 'btn btn-primary'));?>
+                    <?=classes\Html::submitButton('Login', array('class' => 'button no-margin'));?>
                 </div>
                 
                 <?=classes\Html::hiddenField('login');?>
