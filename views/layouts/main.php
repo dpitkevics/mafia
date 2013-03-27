@@ -25,15 +25,17 @@
                     <?=classes\Html::passwordField('password', '', array('placeholder' => 'Password'));?>
                 </div>
                 
-                <div class="span2">
+                <div class="span1">
                     <?=classes\Html::submitButton('Login', array('class' => 'btn btn-primary'));?>
                 </div>
                 
                 <?=classes\Html::hiddenField('login');?>
                 <?=classes\Html::formEnd();?>
                 
-                <?php else: ?>
-                    
+                <div class="span1">
+                    <?=classes\Html::link('Registration', classes\URL::create('site/registration'), array('class' => 'button'));?>
+                </div>
+                
                 <?php endif; ?>
                 
                 <div class="span4">

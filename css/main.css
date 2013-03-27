@@ -1,0 +1,16 @@
+.button, .button:active, .button:hover, .button:focus {
+    color: #ffffff;
+    background-color: #0088cc;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding-right: 12px;
+    padding-left: 12px;
+    margin-right: 2px;
+    line-height: 14px;
+    text-decoration: none;
+}
