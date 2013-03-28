@@ -65,7 +65,7 @@ class Loader {
      */
     protected function loadController($controller) {
         $controllerString = $this->_prefix . "\\controllers\\" . ucfirst($controller) . "Controller";
-        $this->_iOfController = new $controllerString($controller);
+        $this->_iOfController = new $controllerString($controller, $this->_prefix);
         return $this->_iOfController;
     }
     

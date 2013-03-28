@@ -46,7 +46,7 @@ class Router {
         $config = configs\CoreConfig::router();
         
         $url = \classes\URL::shortToParts();
-        if ($config['shortUrl'] && isset($url['url'])) {
+        if ($config['shortUrl'] && !empty($url)) {
             $this->setData($url['addr'], $url['static'], $url['params']);
             return;
         }

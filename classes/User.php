@@ -4,19 +4,19 @@ namespace classes;
 
 class User {
     
-    protected $id;
-    protected $username;
-    protected $password;
-    protected $email;
-    protected $name;
-    protected $surname;
-    protected $age;
-    protected $refered_by;
-    protected $session_id;
-    protected $user_type;
-    protected $timestamp;
+    public $id;
+    public $username;
+    public $password;
+    public $email;
+    public $name;
+    public $surname;
+    public $age;
+    public $refered_by;
+    public $session_id;
+    public $user_type;
+    public $timestamp;
     
-    public function __construct(\RedBean_OODBBean $user) {
+    public function __construct($user) {
         $this->id = $user->id;
         $this->username = $user->username;
         $this->password = $user->password;

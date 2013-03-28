@@ -12,42 +12,72 @@
         <div class="container">
             
             <div class="row">
-
-                <?=classes\Html::unorderedList(
-                    array(
+                
+                <div class="span8">
+                    <?=classes\Html::unorderedList(
                         array(
-                            'link' => array(
-                                'name' => 'Home',
-                                'url' => \classes\URL::create('site/index'),
+                            array(
+                                'link' => array(
+                                    'name' => 'Home',
+                                    'url' => \classes\URL::create('site/index'),
+                                ),
+                                'htmlOptions' => array(
+                                    'class' => 'active',
+                                )
                             ),
-                            'htmlOptions' => array(
-                                'class' => 'active',
-                            )
+                            array(
+                                'link' => array(
+                                    'name' => 'About',
+                                    'url' => \classes\URL::create('site/about'),
+                                ),
+                            ),
+                            array(
+                                'link' => array(
+                                    'name' => 'Contacts',
+                                    'url' => \classes\URL::create('site/contact'),
+                                ),
+                            ),
+                            ($this->auth->checkAuth() ? array(
+                                'link' => array(
+                                    'name' => 'Logout',
+                                    'url' => \classes\URL::create('site/logout'),
+                                ),
+                            ) : false),
                         ),
                         array(
-                            'link' => array(
-                                'name' => 'About',
-                                'url' => \classes\URL::create('site/about'),
-                            ),
-                        ),
-                        array(
-                            'link' => array(
-                                'name' => 'Contacts',
-                                'url' => \classes\URL::create('site/contact'),
-                            ),
-                        ),
-                        ($this->auth->checkAuth() ? array(
-                            'link' => array(
-                                'name' => 'Logout',
-                                'url' => \classes\URL::create('site/logout'),
-                            ),
-                        ) : false),
-                    ),
-                    array(
-                        'class' => 'nav nav-pills'
-                    )
-                );
-                ?>
+                            'class' => 'nav nav-pills'
+                        )
+                    );
+                    ?>
+                </div>
+                
+                <?php if ($this->auth->checkAuth()): ?>
+                <div class="span3 padding8">
+                    <div class="row">
+                        <div class="alert alert-info">
+                            <div class="row">
+                                Greetings, <?=$this->user->username;?>!
+                            </div>
+                            <div class="row">
+                                Energy:
+                            </div>
+                            <div class="progress progress-striped active">
+                                <div class="bar" style="width: <?=$this->user->energy_level;?>%;">
+                                    <?=ceil(($this->user->energy_max / 100) * $this->user->energy_level);?> of <?=$this->user->energy_max;?>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <?php $timeTillEnergyUpdate = (ENERGY_UPDATE_TIME - (time()-$this->user->energy_update_timestamp)); ?>
+                                Energy update in: <?=(($timeTillEnergyUpdate <= 0)?"function updateEnergy();":$timeTillEnergyUpdate);?> sec
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <?php \classes\Dump::r($this->user); ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+                
             </div>
                 
             <?php if (!$this->auth->checkAuth()): ?>

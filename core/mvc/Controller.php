@@ -9,6 +9,11 @@ namespace core\mvc;
 class Controller {
     
     /**
+     * Moduļa nosaukums
+     * @var string
+     */
+    protected $modulePrefix = null;
+    /**
      * Kontroliera nosaukums
      * @var string 
      */
@@ -29,8 +34,9 @@ class Controller {
      * Nosakam kontroliera nosaukumu
      * @param string $controller Kontroliera nosaukums
      */
-    public function __construct($controller) {
+    public function __construct($controller, $prefix = '') {
         $this->controller = $controller;
+        $this->modulePrefix = ltrim($prefix . "/", "\\");
     }
     
     /**
@@ -90,7 +96,7 @@ class Controller {
      */
     protected function draw($view, array $params = array()) {
         if (strpos($view, '.')===false)
-            $path = ROOT_DIR . "views/" . $this->controller . "/" . $view . ".php";
+            $path = ROOT_DIR . $this->modulePrefix . "views/" . $this->controller . "/" . $view . ".php";
         else {
             $viewParts = explode('.', $view);
             $reverse = array_reverse($viewParts);
@@ -122,6 +128,30 @@ class Controller {
         
         if (!$this->afterDraw())
             return false;
+    }
+    
+    public function addView($view, array $params=array()) {
+        if (strpos($view, '.')===false)
+            $path = ROOT_DIR . $this->modulePrefix . "views/" . $this->controller . "/" . $view . ".php";
+        else {
+            $viewParts = explode('.', $view);
+            $reverse = array_reverse($viewParts);
+            $path = '';
+            foreach ($reverse as $vPart) {
+                $path = '/' . $vPart . $path;
+            }
+            if (count($reverse)>2)
+                $path = ltrim ($path, '/');
+            else
+                $path = 'views' . $path;
+            $path = ROOT_DIR . $path . '.php';
+        }
+        
+        extract ($params);
+        ob_start();
+        include $path;
+        $content = ob_get_clean();
+        echo $content;
     }
     
 }
