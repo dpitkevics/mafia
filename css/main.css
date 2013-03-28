@@ -19,3 +19,9 @@
     text-decoration: none;
     border: none;
 }
+.no-margin, .no-margin:active, .no-margin:hover, .no-margin:focus {
+    margin: 0px;
+}
+.padding8 {
+    padding: 8px;
+}

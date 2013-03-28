@@ -7,6 +7,8 @@ class Html {
     public static $count = 0;
     
     public static function formBegin($action = '', $method = 'post', array $htmlOptions=array()) {
+        if (empty($action))
+            $action = $_SERVER['REQUEST_URI'];
         $htmlOptions = self::htmlOptionsToString($htmlOptions);
         $formString = "<form action='$action' method='$method' $htmlOptions>";
         return $formString;

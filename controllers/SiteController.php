@@ -15,9 +15,10 @@ namespace controllers;
 class SiteController extends \myclasses\BaseController {
           
     public function actionIndex() {
-        $auth = new \classes\Authentication();            
-        
-        $this->draw('index', array('isUser' => $auth->checkAuth()));
+        $auth = new \classes\Authentication();    
+        $isUser = $auth->checkAuth();
+
+        $this->draw('index', array('isUser' => $isUser));
     }
     
     public function actionRegistration() {
