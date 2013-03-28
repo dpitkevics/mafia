@@ -53,7 +53,7 @@ class Loader {
      * @return Module Iegūtā Moduļa instance
      */
     protected function loadModule($module, $controller, $action, $static, $params) {
-        $moduleString = "\\modules\\" . ucfirst($module) . "\\" . ucfirst($module) . "Module";
+        $moduleString = "modules\\" . ucfirst($module) . "\\" . ucfirst($module) . "Module";
         $this->_iOfModule = new $moduleString($module, $controller, $action, $static, $params);
         return $this->_iOfModule;
     }
