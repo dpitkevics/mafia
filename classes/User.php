@@ -13,6 +13,7 @@ class User {
     protected $age;
     protected $refered_by;
     protected $session_id;
+    protected $user_type;
     protected $timestamp;
     
     public function __construct(\RedBean_OODBBean $user) {
@@ -25,6 +26,7 @@ class User {
         $this->age = $user->age;
         $this->refered_by = $user->refered_by;
         $this->session_id = $user->session_id;
+        $this->user_type = $user->user_type;
         $this->timestamp = $user->timestamp;
     }
     

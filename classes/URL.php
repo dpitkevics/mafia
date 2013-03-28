@@ -42,7 +42,10 @@ class URL {
     
     public static function shortToParts() {
         $get = Validator::Get();
-        $url = $get['url'];
+        if (isset($get['url']))
+            $url = $get['url'];
+        else
+            return null;
         $urlParts = explode('/', $url);
         $result = '';
         if (count($urlParts)!=1) {
