@@ -1,5 +1,5 @@
 <div class="row">
-    <?=classes\Html::formBegin();?>
+    <?php echo classes\Html::formBegin();?>
     
     <div class="row">
         <div class="span8 errors">
@@ -17,10 +17,10 @@
         <div class="row">
 
             <div class="span1">
-                <?=classes\Html::label($model->get('username'), $model->getAttribute('username'), true);?>
+                <?php echo classes\Html::label($model->get('username'), $model->getAttribute('username'), true);?>
             </div>
             <div class="span3">
-                <?=classes\Html::textField($model->get('username'));?>
+                <?php echo classes\Html::textField($model->get('username'));?>
             </div>
 
         </div>
@@ -28,32 +28,32 @@
         <div class="row">
 
             <div class="span1">
-                <?=classes\Html::label($model->get('password'), $model->getAttribute('password'), true);?>
+                <?php echo classes\Html::label($model->get('password'), $model->getAttribute('password'), true);?>
             </div>
             <div class="span3">
-                <?=classes\Html::passwordField($model->get('password'));?>
+                <?php echo classes\Html::passwordField($model->get('password'));?>
             </div>
 
-        </div>
-        
-        <div class="row">
-            
-            <div class="span1">
-                <?=classes\Html::label($model->get('password_ver'), $model->getAttribute('password_ver'), true);?>
-            </div>
-            <div class="span3">
-                <?=classes\Html::passwordField($model->get('password_ver'));?>
-            </div>
-            
         </div>
         
         <div class="row">
             
             <div class="span1">
-                <?=classes\Html::label($model->get('email'), $model->getAttribute('email'), true);?>
+                <?php echo classes\Html::label($model->get('password_ver'), $model->getAttribute('password_ver'), true);?>
             </div>
             <div class="span3">
-                <?=classes\Html::textField($model->get('email'));?>
+                <?php echo classes\Html::passwordField($model->get('password_ver'));?>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            
+            <div class="span1">
+                <?php echo classes\Html::label($model->get('email'), $model->getAttribute('email'), true);?>
+            </div>
+            <div class="span3">
+                <?php echo classes\Html::textField($model->get('email'));?>
             </div>
             
         </div>
@@ -66,10 +66,10 @@
         <div class="row">
             
             <div class="span1">
-                <?=classes\Html::label($model->get('name'), $model->getAttribute('name'));?>
+                <?php echo classes\Html::label($model->get('name'), $model->getAttribute('name'));?>
             </div>
             <div class="span3">
-                <?=classes\Html::textField($model->get('name'));?>
+                <?php echo classes\Html::textField($model->get('name'));?>
             </div>
             
         </div>
@@ -77,10 +77,10 @@
         <div class="row">
             
             <div class="span1">
-                <?=classes\Html::label($model->get('surname'), $model->getAttribute('surname'));?>
+                <?php echo classes\Html::label($model->get('surname'), $model->getAttribute('surname'));?>
             </div>
             <div class="span3">
-                <?=classes\Html::textField($model->get('surname'));?>
+                <?php echo classes\Html::textField($model->get('surname'));?>
             </div>
             
         </div>
@@ -88,10 +88,10 @@
         <div class="row">
             
             <div class="span1">
-                <?=classes\Html::label($model->get('age'), $model->getAttribute('age'));?>
+                <?php echo classes\Html::label($model->get('age'), $model->getAttribute('age'));?>
             </div>
             <div class="span3">
-                <?=classes\Html::dropDownField($model->get('age'), 'range:10-70');?>
+                <?php echo classes\Html::dropDownField($model->get('age'), 'range:10-70');?>
             </div>
             
         </div>
@@ -104,10 +104,10 @@
         <div class="row">
             
             <div class="span1">
-                <?=classes\Html::label($model->get('refered_by'), $model->getAttribute('refered_by'));?>
+                <?php echo classes\Html::label($model->get('refered_by'), $model->getAttribute('refered_by'));?>
             </div>
             <div class="span3">
-                <?=classes\Html::textField($model->get('refered_by'));?>
+                <?php echo classes\Html::textField($model->get('refered_by'));?>
             </div>
             
         </div>
@@ -115,7 +115,7 @@
     </fieldset>
     
     <div class="row">
-        <?=classes\Html::submitButton('Register', array('class' => 'button'));?>
+        <?php echo classes\Html::submitButton('Register', array('class' => 'button'));?>
     </div>
-    <?=classes\Html::formEnd();?>
+    <?php echo classes\Html::formEnd();?>
 </div>
