@@ -40,7 +40,7 @@ class Base {
         $classFile = str_replace( '\\', DIRECTORY_SEPARATOR, $class );
         $classPI = pathinfo( $classFile );
         $classPath = strtolower( $classPI[ 'dirname' ] );
-
+        
         if (is_file($classPath . DIRECTORY_SEPARATOR . $classPI[ 'filename' ] . '.php'))
             include_once( $classPath . DIRECTORY_SEPARATOR . $classPI[ 'filename' ] . '.php' ); 
     }
