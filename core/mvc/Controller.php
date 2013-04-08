@@ -124,6 +124,16 @@ class Controller {
         if (!$this->beforeDraw())
             return false;
         
+        $js = \classes\JS::scriptStart();
+        foreach (\classes\JS::$jss as $jssingle) {
+            $js .= $jssingle . '
+';
+        }
+        $js .= \classes\JS::scriptEnd();
+        
+        $output = str_replace('</body>', $js . '
+            </body>', $output);
+        
         echo $output;
         
         if (!$this->afterDraw())
