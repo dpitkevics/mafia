@@ -44,8 +44,10 @@ class URL {
         $get = Validator::Get();
         if (isset($get['url']))
             $url = $get['url'];
-        else
-            return null;
+        else {
+            $config = \core\configs\CoreConfig::router();
+            $url = $config['controller'] . '/' . $config['action'];
+        }
         $urlParts = explode('/', $url);
         $result = '';
         if (count($urlParts)!=1) {
