@@ -27,8 +27,8 @@
                                 ),
                                 array(
                                     'link' => array(
-                                        'name' => 'About',
-                                        'url' => \classes\URL::create('site/about'),
+                                        'name' => 'Character',
+                                        'url' => \classes\URL::create('game/character/list'),
                                     ),
                                 ),
                                 array(
