@@ -72,34 +72,12 @@
                         </div>
                         <div class="row">
                             <div class="alert alert-info energy-box">
-                                <div class="row">
-                                    Energy:
-                                </div>
-                                <div class="progress progress-info">
-                                    <div class="bar" style="width: <?php echo $this->user->energy_level;?>%;">
-                                        <?php echo ceil(($this->user->energy_max / 100) * $this->user->energy_level);?> of <?php echo $this->user->energy_max;?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <?php $timeTillEnergyUpdate = (ENERGY_UPDATE_TIME - (time()-$this->user->energy_update_timestamp)); ?>
-                                    Energy update in: <?php echo (($timeTillEnergyUpdate <= 0)?"Updating Energy":($this->user->energy_level == 100)?"Max":$timeTillEnergyUpdate . " sec");?>
-                                </div>
+                                <?php $this->addView('modules.Ajax.views.Counter.energy'); ?>
                             </div>
                         </div>
                         <div class="row">
                             <div class="alert alert-danger hp-box">
-                                <div class="row">
-                                    HP:
-                                </div>
-                                <div class="progress progress-danger">
-                                    <div class="bar" style="width: <?php echo $this->user->current_hp; ?>%;">
-                                        <?php echo ceil(($this->user->char_max_hp / 100) * $this->user->current_hp);?> of <?php echo $this->user->char_max_hp;?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <?php $timeTillHpUpdate = ($this->user->char_hp_recovery_time - (time()-$this->user->hp_update_timestamp)); ?>
-                                    HP update in: <?php echo (($timeTillHpUpdate <= 0)?"Updating HP":($this->user->current_hp == 100)?"Max":$timeTillHpUpdate . " sec");?>
-                                </div>
+                                <?php $this->addView('modules.Ajax.views.Counter.hp'); ?>
                             </div>
                         </div>
                     </div>
