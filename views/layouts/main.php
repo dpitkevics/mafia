@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="row">
                                     <?php $timeTillEnergyUpdate = (ENERGY_UPDATE_TIME - (time()-$this->user->energy_update_timestamp)); ?>
-                                    Energy update in: <?php echo (($timeTillEnergyUpdate <= 0)?"Updating Energy":$timeTillEnergyUpdate . " sec");?>
+                                    Energy update in: <?php echo (($timeTillEnergyUpdate <= 0)?"Updating Energy":($this->user->energy_level == 100)?"Max":$timeTillEnergyUpdate . " sec");?>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="row">
                                     <?php $timeTillHpUpdate = ($this->user->char_hp_recovery_time - (time()-$this->user->hp_update_timestamp)); ?>
-                                    HP update in: <?php echo (($timeTillHpUpdate <= 0)?"Updating HP":$timeTillHpUpdate . " sec");?>
+                                    HP update in: <?php echo (($timeTillHpUpdate <= 0)?"Updating HP":($this->user->current_hp == 100)?"Max":$timeTillHpUpdate . " sec");?>
                                 </div>
                             </div>
                         </div>

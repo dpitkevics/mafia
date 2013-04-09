@@ -7,6 +7,7 @@ class Player extends \classes\User {
     public $energy_level;
     public $energy_max;
     public $energy_update_timestamp;
+    public $energy_update_amount;
     
     public $current_hp;
     public $hp_update_timestamp;
@@ -23,6 +24,7 @@ class Player extends \classes\User {
         $this->energy_level = $user->energy_level;
         $this->energy_max = $user->energy_max;
         $this->energy_update_timestamp = $user->energy_update_timestamp;
+        $this->energy_update_amount = $user->energy_update_amount;
         $this->current_hp = $user->current_hp;
         $this->hp_update_timestamp = $user->hp_update_timestamp;
         $this->char_max_hp = $user->char_max_hp;

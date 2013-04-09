@@ -28,7 +28,7 @@ class CounterController extends \myclasses\GameController {
     
     public function actionEnergy() {
         $timeTillEnergyUpdate = (ENERGY_UPDATE_TIME - (time()-$this->user->energy_update_timestamp));
-        if ($timeTillEnergyUpdate <= 0 && $this->user->current_hp != 100)
+        if ($timeTillEnergyUpdate <= 0 && $this->user->energy_level != 100)
             $this->updateEnergy();
         $this->drawPartial('energy');
     }
