@@ -36,7 +36,8 @@ class Controller {
      */
     public function __construct($controller, $prefix = '') {
         $this->controller = $controller;
-        $this->modulePrefix = ltrim($prefix . "/", "\\");
+        if ($prefix != '')
+            $this->modulePrefix = ltrim($prefix . "/", "\\");
     }
     
     /**
