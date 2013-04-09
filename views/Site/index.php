@@ -1,2 +1,3 @@
-<p>Your login state: <?php echo ($isUser)?"true":"false"; ?></p>
-<?php \classes\URL::shortToParts(); ?>
+<div class="row">
+    <h2>Hello in this site</h2>
+</div>

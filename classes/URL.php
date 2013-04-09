@@ -72,5 +72,14 @@ class URL {
         return $urlFinal;
     }
     
+    public static function getUrlPart($part) {
+        $urlParts = self::shortToParts();
+        if (isset($urlParts[$part]))
+            return $urlParts[$part];
+        else if (array_key_exists($part, $urlParts['params']))
+            return $urlParts['params'][$part];
+        return null;
+    }
+    
 }
 

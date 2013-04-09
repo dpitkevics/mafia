@@ -11,7 +11,7 @@
         
         <div class="container">
             <div class="row">
-                
+
                 <div class="row">
                     <div class="span8">
                         <?php echo classes\Html::unorderedList(
@@ -22,7 +22,7 @@
                                         'url' => \classes\URL::create('site/index'),
                                     ),
                                     'htmlOptions' => array(
-                                        'class' => 'active',
+                                        'class' => (classes\URL::getUrlPart('addr')=='site/index')?'active':'',
                                     )
                                 ),
                                 array(
@@ -30,12 +30,9 @@
                                         'name' => 'Character',
                                         'url' => \classes\URL::create('game/character/list'),
                                     ),
-                                ),
-                                array(
-                                    'link' => array(
-                                        'name' => 'Contacts',
-                                        'url' => \classes\URL::create('site/contact'),
-                                    ),
+                                    'htmlOptions' => array(
+                                        'class' => (classes\URL::getUrlPart('addr')=='game/character/list')?'active':'',
+                                    )
                                 ),
                                 ($this->auth->checkAuth() ? array(
                                     'link' => array(
