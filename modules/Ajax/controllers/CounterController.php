@@ -2,7 +2,7 @@
 
 namespace modules\Ajax\controllers;
 
-class CounterController extends \myclasses\GameController {
+class CounterController extends \myclasses\AjaxController {
     
     public function actionHp() {
         $timeTillHpUpdate = ($this->user->char_hp_recovery_time - (time()-$this->user->hp_update_timestamp));
