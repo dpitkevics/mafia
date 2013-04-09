@@ -17,4 +17,10 @@ class Helper {
         return $object;
     }
     
+    public static function getCharLevelData($exp) {
+        $char_levels = \R::findOne('char_leveling', ' :exp >= exp_from AND :exp <= exp_to ',
+                array(':exp' => $exp));
+        return $char_levels;
+    }
+    
 }

@@ -18,6 +18,11 @@ class Player extends \classes\User {
     public $char_type;
     public $char_name;
     
+    public $char_exp;
+    public $char_level;
+    public $char_title;
+    public $char_next_level_xp;
+    
     public function __construct($user) {
         parent::__construct($user);
         
@@ -32,6 +37,12 @@ class Player extends \classes\User {
         $this->char_hp_recovery_amount = $user->char_hp_recovery_amount;
         $this->char_type = $user->char_type;
         $this->char_name = $user->char_name;
+        $this->char_exp = $user->char_exp;
+        
+        $leveling = Helper::getCharLevelData($this->char_exp);
+        $this->char_level = $leveling->level;
+        $this->char_title = $leveling->title;
+        $this->char_next_level_xp = $leveling->exp_to + 1;
     }
     
 }
