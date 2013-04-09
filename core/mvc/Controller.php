@@ -111,13 +111,14 @@ class Controller {
                 $path = 'views' . $path;
             $path = ROOT_DIR . $path . '.php';
         }
-        
+        $path = str_replace('\\', DIRECTORY_SEPARATOR, $path);
         extract ($params);
         ob_start();
         include $path;
         $content = ob_get_clean();
         
         $path = ROOT_DIR . "views/layouts/" . $this->layout . ".php";
+        $path = str_replace('\\', DIRECTORY_SEPARATOR, $path);
         ob_start();
         include $path;
         $output = ob_get_clean();
