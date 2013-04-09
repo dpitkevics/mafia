@@ -97,7 +97,7 @@ class Controller {
      */
     protected function draw($view, array $params = array()) {
         if (strpos($view, '.')===false)
-            $path = ROOT_DIR . $this->modulePrefix . "views/" . $this->controller . "/" . $view . ".php";
+            $path = ROOT_DIR . $this->modulePrefix . "views/" . ucfirst($this->controller) . "/" . $view . ".php";
         else {
             $viewParts = explode('.', $view);
             $reverse = array_reverse($viewParts);
@@ -158,7 +158,7 @@ class Controller {
      */
     protected function drawPartial($view, array $params = array()) {
         if (strpos($view, '.')===false)
-            $path = ROOT_DIR . $this->modulePrefix . "views/" . $this->controller . "/" . $view . ".php";
+            $path = ROOT_DIR . $this->modulePrefix . "views/" . ucfirst($this->controller) . "/" . $view . ".php";
         else {
             $viewParts = explode('.', $view);
             $reverse = array_reverse($viewParts);

@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="alert alert-info">
+                            <div class="alert alert-info energy-box">
                                 <div class="row">
                                     Energy:
                                 </div>
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="row">
                                     <?php $timeTillEnergyUpdate = (ENERGY_UPDATE_TIME - (time()-$this->user->energy_update_timestamp)); ?>
-                                    Energy update in: <?php echo (($timeTillEnergyUpdate <= 0)?"function updateEnergy();":$timeTillEnergyUpdate);?> sec
+                                    Energy update in: <?php echo (($timeTillEnergyUpdate <= 0)?"Updating Energy":$timeTillEnergyUpdate . " sec");?>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="row">
                                     <?php $timeTillHpUpdate = ($this->user->char_hp_recovery_time - (time()-$this->user->hp_update_timestamp)); ?>
-                                    HP update in: <?php echo (($timeTillHpUpdate <= 0)?"function updateHp();":$timeTillHpUpdate);?> sec
+                                    HP update in: <?php echo (($timeTillHpUpdate <= 0)?"Updating HP":$timeTillHpUpdate . " sec");?>
                                 </div>
                             </div>
                         </div>
@@ -150,6 +150,9 @@
             setInterval(function () {
                 <?php echo \classes\JS::ajaxCall(classes\URL::create('ajax/counter/hp'), array(), array(
                     'success' => 'function (html) { $(".hp-box").html(html); }',
+                )); ?>
+                <?php echo \classes\JS::ajaxCall(classes\URL::create('ajax/counter/energy'), array(), array(
+                    'success' => 'function (html) { $(".energy-box").html(html); }',
                 )); ?>
             }, 1000);
         </script>

@@ -33,4 +33,19 @@ class CounterController extends \myclasses\GameController {
         $this->drawPartial('energy');
     }
     
+    public function updateEnergy() {
+        $amountPercentage = (100 / $this->user->energy_max) * $this->user->energy_update_amount;
+        $this->user->energy_level += $amountPercentage;
+        if ($this->user->energy_level > 100)
+            $this->user->energy_level = 100;
+        $this->user->energy_update_timestamp = time();
+        $user = \R::findOne('user_energies', ' user_id = :user_id ',
+                array (':user_id' => $this->user->id));
+        $user->energy_level = $this->user->energy_level;
+        $user->energy_update_timestamp = $this->user->energy_update_timestamp;
+        \R::store($user);
+        
+        return;
+    }
+    
 }
