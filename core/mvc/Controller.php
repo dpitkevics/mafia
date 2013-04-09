@@ -171,7 +171,7 @@ class Controller {
                 $path = 'views' . $path;
             $path = ROOT_DIR . $path . '.php';
         }
-        
+        $path = str_replace('\\', DIRECTORY_SEPARATOR, $path);
         extract ($params);
         ob_start();
         include $path;
