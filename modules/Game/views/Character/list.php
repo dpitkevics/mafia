@@ -10,6 +10,3 @@
         <?php endforeach; ?>
     </div>
 </div>
-<?php \classes\JS::ajaxCall(\classes\URL::create('game/character/list'), array('a' => 1), array(
-    'success' => 'function (html) { alert(html); }',
-)); ?>

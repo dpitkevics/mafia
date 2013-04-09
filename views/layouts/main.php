@@ -12,70 +12,100 @@
         <div class="container">
             <div class="row">
                 
-                <div class="span8">
-                    <?php echo classes\Html::unorderedList(
-                        array(
+                <div class="row">
+                    <div class="span8">
+                        <?php echo classes\Html::unorderedList(
                             array(
-                                'link' => array(
-                                    'name' => 'Home',
-                                    'url' => \classes\URL::create('site/index'),
+                                array(
+                                    'link' => array(
+                                        'name' => 'Home',
+                                        'url' => \classes\URL::create('site/index'),
+                                    ),
+                                    'htmlOptions' => array(
+                                        'class' => 'active',
+                                    )
                                 ),
-                                'htmlOptions' => array(
-                                    'class' => 'active',
-                                )
+                                array(
+                                    'link' => array(
+                                        'name' => 'About',
+                                        'url' => \classes\URL::create('site/about'),
+                                    ),
+                                ),
+                                array(
+                                    'link' => array(
+                                        'name' => 'Contacts',
+                                        'url' => \classes\URL::create('site/contact'),
+                                    ),
+                                ),
+                                ($this->auth->checkAuth() ? array(
+                                    'link' => array(
+                                        'name' => 'Logout',
+                                        'url' => \classes\URL::create('site/logout'),
+                                    ),
+                                ) : false),
                             ),
                             array(
-                                'link' => array(
-                                    'name' => 'About',
-                                    'url' => \classes\URL::create('site/about'),
-                                ),
-                            ),
-                            array(
-                                'link' => array(
-                                    'name' => 'Contacts',
-                                    'url' => \classes\URL::create('site/contact'),
-                                ),
-                            ),
-                            ($this->auth->checkAuth() ? array(
-                                'link' => array(
-                                    'name' => 'Logout',
-                                    'url' => \classes\URL::create('site/logout'),
-                                ),
-                            ) : false),
-                        ),
-                        array(
-                            'class' => 'nav nav-pills'
-                        )
-                    );
-                    ?>
+                                'class' => 'nav nav-pills'
+                            )
+                        );
+                        ?>
+                    </div>
                 </div>
                 
-                <?php if ($this->auth->checkAuth()): ?>
-                <div class="span3 padding8">
-                    <div class="row">
-                        <div class="alert alert-info">
-                            <div class="row">
-                                Greetings, <?php echo $this->user->username;?>!
-                            </div>
-                            <div class="row">
-                                Energy:
-                            </div>
-                            <div class="progress progress-striped active">
-                                <div class="bar" style="width: <?php echo $this->user->energy_level;?>%;">
-                                    <?php echo ceil(($this->user->energy_max / 100) * $this->user->energy_level);?> of <?php echo $this->user->energy_max;?>
+                <div class="row">
+                    
+                    <div class="span8">
+                        <?php echo $content; ?>
+                    </div>
+                    
+                    <?php if ($this->auth->checkAuth()): ?>
+                    <div class="span3">
+                        <div class="row">
+                            <div class="alert alert-success">
+                                <div class="row">
+                                    Greetings, <?php echo $this->user->username;?>!
+                                </div>
+                                <div class="row">
+                                    News of Your <?php echo $this->user->char_name; ?> account.
                                 </div>
                             </div>
-                            <div class="row">
-                                <?php $timeTillEnergyUpdate = (ENERGY_UPDATE_TIME - (time()-$this->user->energy_update_timestamp)); ?>
-                                Energy update in: <?php echo (($timeTillEnergyUpdate <= 0)?"function updateEnergy();":$timeTillEnergyUpdate);?> sec
+                        </div>
+                        <div class="row">
+                            <div class="alert alert-info">
+                                <div class="row">
+                                    Energy:
+                                </div>
+                                <div class="progress progress-info">
+                                    <div class="bar" style="width: <?php echo $this->user->energy_level;?>%;">
+                                        <?php echo ceil(($this->user->energy_max / 100) * $this->user->energy_level);?> of <?php echo $this->user->energy_max;?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <?php $timeTillEnergyUpdate = (ENERGY_UPDATE_TIME - (time()-$this->user->energy_update_timestamp)); ?>
+                                    Energy update in: <?php echo (($timeTillEnergyUpdate <= 0)?"function updateEnergy();":$timeTillEnergyUpdate);?> sec
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="alert alert-danger hp-box">
+                                <div class="row">
+                                    HP:
+                                </div>
+                                <div class="progress progress-danger">
+                                    <div class="bar" style="width: <?php echo $this->user->current_hp; ?>%;">
+                                        <?php echo ceil(($this->user->char_max_hp / 100) * $this->user->current_hp);?> of <?php echo $this->user->char_max_hp;?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <?php $timeTillHpUpdate = ($this->user->char_hp_recovery_time - (time()-$this->user->hp_update_timestamp)); ?>
+                                    HP update in: <?php echo (($timeTillHpUpdate <= 0)?"function updateHp();":$timeTillHpUpdate);?> sec
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <?php \classes\Dump::r($this->user); ?>
-                    </div>
+                    <?php endif; ?>
+                    
                 </div>
-                <?php endif; ?>
                 
             </div>
                 
@@ -110,15 +140,18 @@
             </div>
             <?php endif; ?>
             
-            <div class="row">
-
-                <?php echo $content;?>
-
-            </div>
+            
             
         </div>
             
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="<?php echo ROOT_HOST;?>/js/bootstrap.min.js"></script>
+        <script>
+            setInterval(function () {
+                <?php echo \classes\JS::ajaxCall(classes\URL::create('ajax/counter/hp'), array(), array(
+                    'success' => 'function (html) { $(".hp-box").html(html); }',
+                )); ?>
+            }, 1000);
+        </script>
     </body>
 </html>

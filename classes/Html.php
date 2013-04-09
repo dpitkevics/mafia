@@ -108,6 +108,16 @@ class Html {
         return $linkString;
     }
     
+    public static function ajaxLink($text, $url, array $data = array(), array $params = array(), array $htmlOptions = array(), $type = 'POST') {
+        if (!isset($htmlOptions['id']))
+            $htmlOptions['id'] = 'al' . ++self::$count;
+        $id = $htmlOptions['id'];
+        $htmlOptions = self::htmlOptionsToString($htmlOptions);
+        $linkString = "<a href='#' $htmlOptions>$text</a>";
+        JS::ajaxCall($url, $data, $params, 'click', $id);
+        return $linkString;
+    }
+    
     public static function unorderedList(array $elements = array(), array $htmlOptions = array()) {
         $htmlOptions = self::htmlOptionsToString($htmlOptions);
         $ulString = "<ul $htmlOptions>";

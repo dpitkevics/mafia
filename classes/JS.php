@@ -6,7 +6,7 @@ class JS {
     
     public static $jss = array();
     
-    public static function ajaxCall($url, array $data = array(), array $params = array(), $type = 'POST') {
+    public static function ajaxCall($url, array $data = array(), array $params = array(), $event = '', $id = 'al0', $type = 'POST') {
         $glob['url'] = $url;
         $glob['data'] = $data;
         $glob['type'] = $type;
@@ -32,7 +32,10 @@ class JS {
         $js = "$.ajax(";
         $js .= $json;
         $js .= ");";
-        self::$jss[] = $js;
+        if ($event != '')
+            self::$jss[$event][$id] = $js;
+        
+        return $js;
     }
     
     public static function arrayToJson(array $array = array()) {
@@ -40,11 +43,11 @@ class JS {
     }
     
     public static function scriptStart() {
-        return "<script type='text/javascript'>";
+        return "<script type='text/javascript'>$(function() { " . PHP_EOL;
     }
     
     public static function scriptEnd() {
-        return "</script>";
+        return "});</script>";
     }
     
 }
