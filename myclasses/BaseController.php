@@ -38,6 +38,8 @@ class BaseController extends mvc\Controller {
                                ->on('user_chars.user_id = user_energies.user_id')
                                ->join('users')
                                ->on('user_chars.user_id = users.id')
+                               ->join('char_points')
+                               ->on('user_chars.char_id = char_points.char_id')
                                ->where('user_chars.user_id = ?')
                                ->put($this->auth->user->id)
                                ->get('row');
