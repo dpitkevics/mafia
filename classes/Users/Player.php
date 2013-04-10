@@ -47,22 +47,21 @@ class Player extends \classes\User {
         $this->char_hp_recovery_amount = $user->char_hp_recovery_amount;
         $this->char_type = $user->char_type;
         $this->char_name = $user->char_name;
+
         $this->char_exp = $user->char_exp;
-        
-        $leveling = Helper::getCharLevelData($this->char_exp);
-        $this->char_level = $leveling->level;
-        $this->char_title = $leveling->title;
-        $this->char_next_level_xp = $leveling->exp_to + 1;
-        $this->char_this_level_xp = $leveling->exp_from;
+        $this->char_level = $user->level;
+        $this->char_title = $user->title;
+        $this->char_next_level_xp = $user->exp_to + 1;
+        $this->char_this_level_xp = $user->exp_from;
         
         
-        $this->melee_damage = $user->melee_damage;
-        $this->distance_damage = $user->distance_damage;
-        $this->melee_resistance = $user->melee_resistance;
-        $this->distance_resistance = $user->distance_resistance;
+        $this->melee_damage = $user->melee_damage + ($this->char_level * $user->melee_damage_point);
+        $this->distance_damage = $user->distance_damage + ($this->char_level * $user->distance_damage_point);
+        $this->melee_resistance = $user->melee_resistance + ($this->char_level * $user->melee_resistance_point);
+        $this->distance_resistance = $user->distance_resistance + ($this->char_level * $user->distance_resistance_point);
         $this->special_damage = $user->special_damage;
         $this->ultimate_damage = $user->ultimate_damage;
-        $this->building_speed = $user->building_speed;
+        $this->building_speed = $user->building_speed + ($this->char_level * $user->building_speed_point);
         $this->building_energy_multiplicator = $user->building_energy_multiplicator;
     }
     

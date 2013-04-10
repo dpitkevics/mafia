@@ -67,13 +67,8 @@
                     <?php if ($this->auth->checkAuth()): ?>
                     <div class="span3">
                         <div class="row">
-                            <div class="alert alert-success">
-                                <div class="row">
-                                    Greetings, <?php echo $this->user->username;?>!
-                                </div>
-                                <div class="row">
-                                    News of Your <?php echo $this->user->char_name; ?> account.
-                                </div>
+                            <div class="alert alert-success char-box">
+                                <?php $this->addView('modules.Ajax.views.Workshop.char'); ?>
                             </div>
                         </div>
                         <div class="row">

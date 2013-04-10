@@ -27,6 +27,10 @@ class GameController extends mvc\Controller {
                                ->on('user_chars.user_id = users.id')
                                ->join('char_points')
                                ->on('user_chars.char_id = char_points.char_id')
+                               ->join('char_leveling')
+                               ->on('user_chars.char_level = char_leveling.level')
+                               ->join('char_leveling_bonus_points')
+                               ->on('user_chars.char_id = char_leveling_bonus_points.char_id')
                                ->where('user_chars.user_id = ?')
                                ->put($this->auth->user->id)
                                ->get('row');
