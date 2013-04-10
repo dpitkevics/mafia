@@ -14,9 +14,11 @@ class WorkshopController extends \myclasses\AjaxController {
         $user = \R::findOne('user_energies', ' user_id = :user_id ',
                 array (':user_id' => $this->user->id));
         $user->energy_level = $this->user->energy_level;
-        $char
-        $user->char_exp = $this->user->char_exp;
+        $char_user = \R::findOne('user_chars', ' user_id = :user_id ',
+                array (':user_id' => $this->user->id));
+        $char_user->char_exp = $this->user->char_exp;
         \R::store($user);
+        \R::store($char_user);
         
         $this->drawPartial('xp');
     }
