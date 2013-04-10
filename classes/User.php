@@ -17,7 +17,9 @@ class User {
     public $timestamp;
     
     public function __construct($user) {
-        $this->id = $user->id;
+        $b = \R::findOne('users', ' session_id = :session_id ',
+                array(':session_id' => session_id()));
+        $this->id = $b->id;
         $this->username = $user->username;
         $this->password = $user->password;
         $this->email = $user->email;

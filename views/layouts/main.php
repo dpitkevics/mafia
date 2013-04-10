@@ -34,6 +34,15 @@
                                         'class' => (classes\URL::getUrlPart('addr')=='game/character/list')?'active':'',
                                     )
                                 ),
+                                array(
+                                    'link' => array(
+                                        'name' => 'Workshop',
+                                        'url' => \classes\URL::create('game/workshop/index'),
+                                    ),
+                                    'htmlOptions' => array(
+                                        'class' => (classes\URL::getUrlPart('addr')=='game/workshop/index')?'active':'',
+                                    )
+                                ),
                                 ($this->auth->checkAuth() ? array(
                                     'link' => array(
                                         'name' => 'Logout',
@@ -68,21 +77,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="alert alert-block">
-                                <div class="row">
-                                    Exp:
-                                </div>
-                                <div class="progress progress-warning">
-                                    <div class="bar" style="width: <?php echo ($this->user->char_next_level_xp / 100) * $this->user->char_exp; ?>%;">
-                                        <?php echo $this->user->char_exp; ?> of <?php echo $this->user->char_next_level_xp;?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    Your level: <?php echo $this->user->char_level; ?>
-                                </div>
-                                <div class="row">
-                                    Your title: <?php echo $this->user->char_title; ?>
-                                </div>
+                            <div class="alert alert-block xp-box">
+                                <?php $this->addView('modules.Ajax.views.Workshop.xp'); ?>
                             </div>
                         </div>
                         <div class="row">

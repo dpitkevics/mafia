@@ -22,6 +22,7 @@ class Player extends \classes\User {
     public $char_level;
     public $char_title;
     public $char_next_level_xp;
+    public $char_this_level_xp;
     
     public $melee_damage;
     public $distance_damage;
@@ -52,6 +53,8 @@ class Player extends \classes\User {
         $this->char_level = $leveling->level;
         $this->char_title = $leveling->title;
         $this->char_next_level_xp = $leveling->exp_to + 1;
+        $this->char_this_level_xp = $leveling->exp_from;
+        
         
         $this->melee_damage = $user->melee_damage;
         $this->distance_damage = $user->distance_damage;

@@ -19,6 +19,7 @@ class CounterController extends \myclasses\AjaxController {
         $this->user->hp_update_timestamp = time();
         $user = \R::findOne('user_chars', ' user_id = :user_id ',
                 array (':user_id' => $this->user->id));
+        
         $user->current_hp = $this->user->current_hp;
         $user->hp_update_timestamp = $this->user->hp_update_timestamp;
         \R::store($user);
